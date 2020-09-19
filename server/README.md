@@ -15,7 +15,7 @@
 - Run `google-oauthlib-tool --scope https://www.googleapis.com/auth/assistant-sdk-prototype --save --headless --client-secrets /path/to/client_secret_client-id.json` ensure to change the `/path/to/client_secret_client-id.json` to your secrets file (probably `./auth/client_secret_STUFF.json`).
 - Follow the rest of the steps https://developers.google.com/assistant/sdk/guides/service/python/embed/install-sample#generate_credentials
 - Make sure to take note of where your `credentials.json` is saved for windows it is save in `C:\Users\<user>\AppData\Roaming\google-oauthlib-tool\credentials.json`
-- Now register the device by running `googlesamples-assistant-devicetool register --model <projectID>Dev --type LIGHT --manufacturer HackMIT --product-name querycardz --device Dev --client-type SERVICE`
+- Now register the device by running `googlesamples-assistant-devicetool --project-id <projectID/not "project-XXXXX"> register --model Dev --type LIGHT --manufacturer HackMIT --product-name querycardz --device Dev --client-type SERVICE`
 - This should register your device using the api take note of the device-id in the console window and create a python file in `./auth` called `credentials.json`
 
   ```json
