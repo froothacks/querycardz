@@ -28,6 +28,7 @@ wv = api.load('word2vec-google-news-300')
 
 allTopics = ["biology", "physics", "chemistry", "history", "math", "economics"]
 
+
 def getTopics(question, answer):
     table = str.maketrans(dict.fromkeys(string.punctuation))  # OR {key: None for key in string.punctuation}
     new_q = question.translate(table)
@@ -62,10 +63,12 @@ def getTopics(question, answer):
     print("maxscore", maxScore, maxWord)
     return []
 
-while True:
-    # input1 = input("enter word 1:")
-    # input2 = input("enter word 2:")
-    # print('%r\t%r\t%.2f' % (input1, input2, wv.similarity(input1, input2)))
-    question = input("enter question: ")
-    answer = input("enter answer: ")
-    print(getTopics(question, answer))
+
+if __name__ == "__main__":
+    while True:
+        # input1 = input("enter word 1:")
+        # input2 = input("enter word 2:")
+        # print('%r\t%r\t%.2f' % (input1, input2, wv.similarity(input1, input2)))
+        question = input("enter question: ")
+        answer = input("enter answer: ")
+        print(getTopics(question, answer))
