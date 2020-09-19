@@ -17,3 +17,24 @@ chrome.runtime.onInstalled.addListener(function() {
     }]);
   });
 });
+
+function doStuffWithDom(domContent) {
+    console.log('I received the following DOM content:\n' + domContent);
+    if (domContent !== undefined) {
+      let domparser = new DOMParser();
+      let doc = domparser.parseFromString(domContent, "text/html");
+      let collection = doc.getElementsByClassName("gLFyf");
+      Array.from(collection).forEach(function (element) {
+        console.log(element.value);
+      });
+    }
+}
+
+chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+  if (changeInfo.status == 'complete') {
+    console.log("complete");
+    console.log(tab);
+    console.log(changeInfo);
+    chrome.tabs.sendMessage(tab.id, {text: 'report_back'}, doStuffWithDom);
+  }
+});
