@@ -143,9 +143,13 @@ def getAnswer(query, format_html=False, verbose=False):
                              grpc_channel, DEFAULT_GRPC_DEADLINE) as assistant:
         response_text, response_html = assistant.assist(
             text_query=query)
-    return response_html if format_html else response_text
+    return_result = response_html if format_html else response_text
+    if return_result is not None and format_html is False:
+        return_result = "\n".join(response_text.strip().split("\n")[1:])
+    return return_result
 
 
 if __name__ == '__main__':
-    print(getAnswer("What is 4398uyfdhsf9843hfsdkfh"))
+    print(getAnswer("What is krebs cycle"))
+    print(getAnswer("Who is napoleon"))
     print(getAnswer("What is Mitosis"))
