@@ -1,11 +1,18 @@
 from flask import Flask
+from flask_pyoidc.flask_pyoidc import OIDCAuthentication
 import textinput
-app = Flask(__name__)
+import atexit
 
 
 @app.route('/', methods=["POST"])
 def storeQueryForUser():
-    return textinput.getAnswer("This is a test")
+    search_query = request.args.get('query')
+    textinput.getAnswer(search_query)
+
+
+@atexit.register
+def shutdown():
+    client.disconnect()
 
 
 if __name__ == '__main__':
