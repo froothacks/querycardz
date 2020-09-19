@@ -2,7 +2,12 @@
   "name": "Querycardz",
   "version": "1.0",
   "description": "Querycardz 1.0",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": [
+    "input",
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "<all_urls>"],
   "options_page": "options.html",
   "background": {
     "scripts": ["background.js"],
