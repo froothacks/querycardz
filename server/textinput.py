@@ -1,18 +1,4 @@
-# Copyright (C) 2017 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""Sample that implements a text client for the Google Assistant Service."""
+# IMPORTS
 
 import os
 import logging
@@ -38,6 +24,7 @@ except (SystemError, ImportError):
     import browser_helpers
 
 
+LANG = "en-US"
 ASSISTANT_API_ENDPOINT = 'embeddedassistant.googleapis.com'
 DEFAULT_GRPC_DEADLINE = 60 * 3 + 5
 PLAYING = embedded_assistant_pb2.ScreenOutConfig.PLAYING
@@ -118,51 +105,19 @@ class SampleTextAssistant(object):
                 self.conversation_state = conversation_state
             if resp.dialog_state_out.supplemental_display_text:
                 text_response = resp.dialog_state_out.supplemental_display_text
-        return text_response, html_response, conversation_state
+        return text_response, html_response
 
 
-# @click.command()
-# @click.option('--api-endpoint', default=ASSISTANT_API_ENDPOINT,
-#               metavar='<api endpoint>', show_default=True,
-#               help='Address of Google Assistant API service.')
-# @click.option('--credentials',
-#               metavar='<credentials>', show_default=True,
-#               default=os.path.join(click.get_app_dir('google-oauthlib-tool'),
-#                                    'credentials.json'),
-#               help='Path to read OAuth2 credentials.')
-# @click.option('--device-model-id',
-#               metavar='<device model id>',
-#               required=True,
-#               help=(('Unique device model identifier, '
-#                      'if not specifed, it is read from --device-config')))
-# @click.option('--device-id',
-#               metavar='<device id>',
-#               required=True,
-#               help=(('Unique registered device instance identifier, '
-#                      'if not specified, it is read from --device-config, '
-#                      'if no device_config found: a new device is registered '
-#                      'using a unique id and a new device config is saved')))
-# @click.option('--lang', show_default=True,
-#               metavar='<language code>',
-#               default='en-US',
-#               help='Language code of the Assistant')
-# @click.option('--display', is_flag=True, default=False,
-#               help='Enable visual display of Assistant responses in HTML.')
-# @click.option('--verbose', '-v', is_flag=True, default=False,
-#               help='Verbose logging.')
-# @click.option('--grpc-deadline', default=DEFAULT_GRPC_DEADLINE,
-#               metavar='<grpc deadline>', show_default=True,
-#               help='gRPC deadline in seconds')
-def main():
-    api_endpoint = ASSISTANT_API_ENDPOINT
-    credentials = os.path.join(click.get_app_dir(
-        'google-oauthlib-tool'), 'credentials.json')
-    device_id = "0cf022b4-fa43-11ea-acb4-2016b929e2c5"
-    device_model_id = "project-427268355286Dev"
-    lang = "en-US"
-    display = True
-    verbose = False
-    grpc_deadline = DEFAULT_GRPC_DEADLINE
+def getAnswer(query, format_html=False, verbose=False):
+    credentials = ""
+    device_id = ""
+    device_model_id = ""
+    with open("auth\\credentials.json") as f:
+        json_creds = json.load(f)
+        credentials = json_creds['creds_path']
+        device_id = json_creds['device_id']
+        device_model_id = json_creds['device_model_id']
+
     # Setup logging.
     logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO)
 
@@ -181,23 +136,16 @@ def main():
 
     # Create an authorized gRPC channel.
     grpc_channel = google.auth.transport.grpc.secure_authorized_channel(
-        credentials, http_request, api_endpoint)
-    logging.info('Connecting to %s', api_endpoint)
+        credentials, http_request, ASSISTANT_API_ENDPOINT)
+    logging.info('Connecting to %s', ASSISTANT_API_ENDPOINT)
 
-    with SampleTextAssistant(lang, device_model_id, device_id, display,
-                             grpc_channel, grpc_deadline) as assistant:
-        while True:
-            query = click.prompt('')
-            click.echo('<you> %s' % query)
-            response_text, response_html, conversation_state = assistant.assist(
-                text_query=query)
-            print(response_text, response_html, conversation_state, sep="\n\n")
-            if display and response_html:
-                system_browser = browser_helpers.system_browser
-                system_browser.display(response_html)
-            if response_text:
-                click.echo('<@assistant> %s' % response_text)
+    with SampleTextAssistant(LANG, device_model_id, device_id, format_html,
+                             grpc_channel, DEFAULT_GRPC_DEADLINE) as assistant:
+        response_text, response_html = assistant.assist(
+            text_query=query)
+    return response_html if format_html else response_text
 
 
 if __name__ == '__main__':
-    main()
+    print(getAnswer("What is 4398uyfdhsf9843hfsdkfh"))
+    print(getAnswer("What is Mitosis"))

@@ -246,3 +246,4 @@ dist
 .pnp.*
 
 .idea/
+server/auth
