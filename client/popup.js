@@ -19,7 +19,7 @@ changeColor.onclick = function(element) {
         {code: 'document.body.style.backgroundColor = "' + color + '";'});
   });
   */
- chrome.tabs.create({'url': chrome.extension.getURL('newpage.html')}, function(tab) {
+ chrome.tabs.create({'url': chrome.extension.getURL('frontend/build/index.html')}, function(tab) {
   // Tab opened.
  });
 };
