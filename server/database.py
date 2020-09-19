@@ -55,7 +55,8 @@ class QueryCardzDatabase:
             doc = self.database.create_document(data)
 
 
-db = QueryCardzDatabase(databaseName, "auth/ibm_credentials.json")
-db.connect()
-db.search_query("test@test.ca", "Another query", "F", ["A", "D"])
-print(db.getTopics("test@test.ca"))
+if __name__ == "__main__":
+    db = QueryCardzDatabase(databaseName, "auth/ibm_credentials.json")
+    db.connect()
+    db.search_query("test@test.ca", "Another query", "F", ["A", "D"])
+    print(db.getTopics("test@test.ca"))
