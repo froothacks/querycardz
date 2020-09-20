@@ -26,6 +26,11 @@ class QueryCardzDatabase:
         self.client.connect()
         self.database = self.client.create_database(databaseName)
 
+    def getCards(self, user_email, topic):
+        all_res = self.getUserRecord(user_email)[QUERIES]
+        print(all_res)
+        return list(filter(lambda obj: topic in obj[TOPICS], all_res))
+
     def getUserRecord(self, user_email):
         return self.database[user_email]
 
@@ -58,5 +63,6 @@ class QueryCardzDatabase:
 if __name__ == "__main__":
     db = QueryCardzDatabase(databaseName, "auth/ibm_credentials.json")
     db.connect()
-    db.search_query("test@test.ca", "Another query", "F", ["A", "D"])
+    # db.search_query("test@test.ca", "Another query", "F", ["A", "D"])
     print(db.getTopics("test@test.ca"))
+    print(db.getCards("test@test.ca", "biology"))
