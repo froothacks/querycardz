@@ -6,7 +6,7 @@ body {
 }
 
 .chevron:hover {
-  filter: drop-shadow(0 0 0.7rem crimson);
+  filter: drop-shadow(0 0 10px #1f333b);
 }
 
 #question {
