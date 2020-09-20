@@ -1,7 +1,9 @@
+import client_id from "./secrets.js";
+
 var auth_url = "https://accounts.google.com/o/oauth2/auth?";
 console.log("launching auth flow 0");
-var client_id =
-  "427268355286-u489aod8fbjeapmlgd57mts4np0b7iv8.apps.googleusercontent.com"; // must be Web Application type
+// var client_id =
+//   "427268355286-u489aod8fbjeapmlgd57mts4np0b7iv8.apps.googleusercontent.com"; // must be Web Application type
 var redirect_url = chrome.identity.getRedirectURL(); // make sure to define Authorised redirect URIs in the Google Console such as https://<-your-extension-ID->.chromiumapp.org/
 
 var auth_params = {
