@@ -6,7 +6,7 @@ card.addEventListener("click", function () {
   $("#answer").show();
 });
 
-const URL = "127.0.0.1:5000/getcards";
+const URL = "127.0.0.1:5000/getCards";
 let data = [];
 let currentCard = 0;
 

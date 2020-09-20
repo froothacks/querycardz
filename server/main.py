@@ -44,5 +44,4 @@ if __name__ == '__main__':
     isQ = questions.IsQuestion()
     db = database.QueryCardzDatabase("querycardz", "auth/ibm_credentials.json")
     db.connect()
-    print(db.getCards("test@test.ca", "biology"))
     app.run()
