@@ -45,6 +45,11 @@ function updateCard() {
       (currentCard * 100) / (data.length - 1 == 0 ? 1 : data.length - 1)
     ) + " %"
   );
+  console.log(
+    Math.round(
+      (currentCard * 100) / (data.length - 1 == 0 ? 1 : data.length - 1)
+    ) + " %"
+  );
   $("#question").text(qa.query);
   $("#answer").hide();
   $("#answer").html(ans);
