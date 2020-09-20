@@ -8,19 +8,9 @@ let email = "";
 function f(d) {
   console.log(d);
   email = d.email;
-  if (email == "") {
-    getEmail();
+  if (email == "" || email == undefined) {
+    setTimeout(getEmail, 2000);
   }
-  fetch(
-    `http://${URL}?email=${email}&topic=${getParameterByName("topic")}`,
-    requestOptions
-  )
-    .then((response) => response.json())
-    .then((result) => {
-      data = result;
-      updateCard();
-    })
-    .catch((error) => console.log("error", error));
 }
 const getEmail = () => chrome.storage.sync.get("email", f);
 getEmail();
