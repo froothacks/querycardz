@@ -144,8 +144,7 @@ def getAnswer(query, format_html=False, verbose=False):
         response_text, response_html = assistant.assist(
             text_query=query)
     return_result = response_html if format_html else response_text
-
-    if return_result is not None and format_html is False and return_result.count("\n") > 1:
+    if return_result is not None and format_html is False and return_result.count("\n") >= 1:
         return_result = "\n".join(response_text.strip().split("\n")[1:])
     return return_result
 
