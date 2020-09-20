@@ -59,16 +59,19 @@ function updateCard() {
     linkURL = linkData[1].replace(" ).");
     ans = ans[0] + ` <a target="_blank" href=${linkURL}>${linkName}</a>`;
   }
-  $("#cardProgress").text(
-    Math.round(
-      (currentCard * 100) / (data.length - 1 == 0 ? 1 : data.length - 1)
-    ) + " %"
-  );
+  let num = 0;
+  if (data.length == 0 || data.length == 1) {
+    num = 100;
+  } else {
+    num = (currentCard * 100) / (data.length - 1);
+  }
+  $("#cardProgress").text(Math.round(num) + " %");
   console.log(
     Math.round(
       (currentCard * 100) / (data.length - 1 == 0 ? 1 : data.length - 1)
     ) + " %"
   );
+
   $("#question").text(qa.query);
   $("#answer").hide();
   $("#answer").html(ans);
