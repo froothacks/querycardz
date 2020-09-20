@@ -1,10 +1,14 @@
 var card = document.querySelector(".flipcard");
-
-card.addEventListener("click", function () {
-  console.log("clicked");
+function flip(event) {
+  console.log("clicked", event);
+  if (event && event.target.localName == "a") {
+    return;
+  }
   card.classList.toggle("is-flipped");
   $("#answer").show();
-});
+}
+
+card.addEventListener("click", flip);
 
 const URL = "127.0.0.1:5000/getCards";
 let data = [];
@@ -26,9 +30,19 @@ function leftCard() {
 function updateCard() {
   qa = data[currentCard];
   card.classList.remove("is-flipped");
+  if (!qa.answer) {
+    return;
+  }
+  ans = qa.answer.split("\\n");
+  if (ans.length >= 2) {
+    linkData = ans[1].split(" ( ");
+    linkName = linkData[0];
+    linkURL = linkData[1].replace(" ).");
+    ans = ans[0] + ` <a target="_blank" href=${linkURL}>${linkName}</a>`;
+  }
   $("#question").text(qa.query);
   $("#answer").hide();
-  $("#answer").text(qa.answer);
+  $("#answer").html(ans);
 }
 
 function rightCard() {
@@ -65,10 +79,10 @@ document.onkeydown = function (event) {
       rightCard();
       break;
     case "ArrowUp":
-      // Up pressed
+      flip();
       break;
     case "ArrowDown":
-      // Down pressed
+      flip();
       break;
   }
   event.preventDefault(); // prevent the default action (scroll / move caret)
