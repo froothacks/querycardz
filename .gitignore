@@ -247,3 +247,4 @@ dist
 
 .idea/
 server/auth
+secrets.js
