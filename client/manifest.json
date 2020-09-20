@@ -2,13 +2,20 @@
   "name": "Querycardz",
   "version": "1.0",
   "description": "Querycardz 1.0",
+   "oauth2": {
+    "client_id": "Your Client ID from Google Develpers console (Must be Web Application)",
+    "scopes": [
+       "openid", "email", "profile"
+    ]
+   },
   "permissions": [
     "input",
     "activeTab",
     "declarativeContent",
     "storage",
     "<all_urls>",
-    "tabs"
+    "tabs",
+    "identity"
   ],
   "options_page": "options.html",
   "background": {
@@ -43,5 +50,5 @@
     "128": "images/querycardz128.png"
   },
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://code.jquery.com/ https://stackpath.bootstrapcdn.com https://cdn.jsdelivr.net; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com/ https://code.jquery.com/ https://stackpath.bootstrapcdn.com https://cdn.jsdelivr.net; object-src 'self'"
 }
