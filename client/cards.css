@@ -8,6 +8,10 @@ body {
 .chevron:hover {
   filter: drop-shadow(0 0 10px #1f333b);
 }
+.center-in-card {
+  max-height: 404px;
+  overflow-y: auto;
+}
 
 #question {
   text-transform: capitalize;
