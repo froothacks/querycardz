@@ -43,6 +43,10 @@ chrome.identity.launchWebAuthFlow(
         chrome.storage.sync.set({ email: userEmail }, function () {
           console.log("Set user email", userEmail);
         });
+        let userPicture = JSON.parse(result).picture;
+        chrome.storage.sync.set({ picture: userPicture }, function () {
+          console.log("Set user picture", userPicture);
+        });
       })
       .catch((error) => console.log("error", error));
   }
