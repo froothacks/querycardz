@@ -5,15 +5,12 @@
 "use strict";
 
 chrome.runtime.onInstalled.addListener(function () {
-  chrome.storage.sync.set({ color: "#3aa757" }, function () {
-    console.log("The color is green.");
-  });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([
       {
         conditions: [
           new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostEquals: "developer.chrome.com" },
+            pageUrl: { hostContains: "." },
           }),
         ],
         actions: [new chrome.declarativeContent.ShowPageAction()],
@@ -22,60 +19,14 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
-function doStuffWithDom(domContent) {
-  console.log("I received the following DOM content:\n" + domContent);
+function doStuffWithDom(domContent) {;
   if (domContent !== undefined) {
+    console.log("google search!");
     let domparser = new DOMParser();
     let doc = domparser.parseFromString(domContent, "text/html");
     let collection = doc.getElementsByClassName("gLFyf");
     Array.from(collection).forEach(function (element) {
-      console.log(element.value);
-      // let data = {query: "what is meiosis"};
-      // let url = 'http://localhost:5000/';
-
-      // $http.post(url, data).then(function(response){
-      //   if(response.data){
-      //     console.log("success");
-      //   } else {
-      //     console.log("failure");
-      //   }
-      // });
-      // var http = new XMLHttpRequest();
-      // // var url = 'get_data.php';
-      // var params = `query=${encodeURIComponent("what is mitosis")}`;
-      // http.open('POST', url, true);
-      //
-      // //Send the proper header information along with the request
-      // http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      // http.onreadystatechange = function() {//Call a function when the state changes.
-      //     if(http.readyState == 4 && http.status == 200) {
-      //         alert(http.responseText);
-      //     }
-      // }
-      // http.send(params);
-
-      // var details = {
-      //     'userName': 'test@gmail.com',
-      //     'password': 'Password!',
-      //     'grant_type': 'password'
-      // };
-
-      // var formBody = [];
-      // for (var property in data) {
-      //   var encodedKey = encodeURIComponent(property);
-      //   var encodedValue = encodeURIComponent(data[property]);
-      //   formBody.push(encodedKey + "=" + encodedValue);
-      // }
-      // formBody = formBody.join("&");
-      //
-      // fetch(url, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      //   },
-      //   body: formBody
-      // })
+      console.log("query", element.value);
       var requestOptions = {
         method: "POST",
         redirect: "follow",
@@ -86,6 +37,8 @@ function doStuffWithDom(domContent) {
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
     });
+  } else {
+    console.log("undefined DOM (not google search)");
   }
 }
 
@@ -99,6 +52,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 chrome.browserAction.onClicked.addListener(function (activeTab) {
-  var newURL = "http://stackoverflow.com/";
+  var newURL = "newpage.html";
   chrome.tabs.create({ url: newURL });
 });
