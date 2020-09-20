@@ -30,7 +30,7 @@ function leftCard() {
 function updateCard() {
   qa = data[currentCard];
   card.classList.remove("is-flipped");
-  if (!qa.answer) {
+  if (!qa || !qa.answer) {
     return;
   }
   ans = qa.answer.split("\\n");
@@ -40,6 +40,16 @@ function updateCard() {
     linkURL = linkData[1].replace(" ).");
     ans = ans[0] + ` <a target="_blank" href=${linkURL}>${linkName}</a>`;
   }
+  $("#cardProgress").text(
+    Math.round(
+      (currentCard * 100) / (data.length - 1 == 0 ? 1 : data.length - 1)
+    ) + " %"
+  );
+  console.log(
+    Math.round(
+      (currentCard * 100) / (data.length - 1 == 0 ? 1 : data.length - 1)
+    ) + " %"
+  );
   $("#question").text(qa.query);
   $("#answer").hide();
   $("#answer").html(ans);
@@ -52,6 +62,9 @@ function rightCard() {
   }
   updateCard();
 }
+
+document.querySelector(".left").addEventListener("click", leftCard);
+document.querySelector(".right").addEventListener("click", rightCard);
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;

@@ -5,6 +5,18 @@ body {
   background-size: cover;
 }
 
+.chevron:hover {
+  filter: drop-shadow(0 0 10px #1f333b);
+}
+.center-in-card {
+  max-height: 404px;
+  overflow-y: auto;
+}
+
+#question {
+  text-transform: capitalize;
+}
+
 .flipcard {
   transition: transform 1s;
   transform-style: preserve-3d;
@@ -50,30 +62,30 @@ body {
 }
 
 .chevron::before {
-	border-style: solid;
-	border-width: 0.25em 0.25em 0 0;
-	content: '';
-	display: inline-block;
-	height: 1em;
-	left: 0.15em;
-	position: relative;
-	top: 0.15em;
-	transform: rotate(-45deg);
-	vertical-align: top;
-	width: 1em;
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: "";
+  display: inline-block;
+  height: 1em;
+  left: 0.15em;
+  position: relative;
+  top: 0.15em;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 1em;
 }
 
 .chevron.right:before {
-	left: 0;
-	transform: rotate(45deg);
+  left: 0;
+  transform: rotate(45deg);
 }
 
 .chevron.bottom:before {
-	top: 0;
-	transform: rotate(135deg);
+  top: 0;
+  transform: rotate(135deg);
 }
 
 .chevron.left:before {
-	left: 0.25em;
-	transform: rotate(-135deg);
+  left: 0.25em;
+  transform: rotate(-135deg);
 }
