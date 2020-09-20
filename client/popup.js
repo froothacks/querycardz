@@ -15,7 +15,7 @@ function p(d) {
   }
   console.log(pic);
   $("#pic").attr("src", pic);
-  $("#signinState").text("Signed In");
+  $("#signinState").html("Signed In");
 }
 const getPicture = () => chrome.storage.sync.get("picture", p);
 getPicture();
