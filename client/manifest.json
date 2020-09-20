@@ -8,16 +8,25 @@
     "declarativeContent",
     "storage",
     "<all_urls>",
-    "tabs"],
+    "tabs"
+  ],
   "options_page": "options.html",
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
-  "content_scripts": [{
-    "matches": ["*://*.google.com/*"],
-    "js": ["content.js"]
-  }],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -33,5 +42,6 @@
     "48": "images/querycardz48.png",
     "128": "images/querycardz128.png"
   },
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://code.jquery.com/ https://stackpath.bootstrapcdn.com https://cdn.jsdelivr.net; object-src 'self'"
 }
