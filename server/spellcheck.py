@@ -1,3 +1,4 @@
 from autocorrect import Speller
-spell = Speller()
-print(spell(input()))
+if __name__ == "__main__":
+    spell = Speller()
+    print(spell(input()))
