@@ -14,7 +14,7 @@ app = Flask(__name__)
 @app.route('/', methods=["POST"])
 def storeQueryForUser():
     search_query = request.args.get('query')
-    search_query = spellchecker.spell(search_query)
+    search_query = spellchecker(search_query)
     email = request.args.get('email')
     print(email)
 
