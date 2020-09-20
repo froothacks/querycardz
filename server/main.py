@@ -15,6 +15,8 @@ app = Flask(__name__)
 def storeQueryForUser():
     search_query = request.args.get('query')
     search_query = spellchecker(search_query)
+    if search_query == "":
+        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
     email = request.args.get('email')
     print(email)
 
