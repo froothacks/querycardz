@@ -49,6 +49,8 @@ class QueryCardzDatabase:
         return doc
 
     def search_query(self, user_email, search, answer, search_topic_array):
+        if search == "":
+            return
         doc_exists = user_email in self.database
         search_data_object = {
             QUERY: search,
