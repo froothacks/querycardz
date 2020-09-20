@@ -8,10 +8,25 @@ function flip(event) {
   card.classList.toggle("is-flipped");
   $("#answer").show();
 }
-chrome.storage.sync.get("email", (d) => {
-  email = d;
-});
-
+function f(d) {
+  console.log(d);
+  email = d.email;
+  if (email == "") {
+    getEmail();
+  }
+  fetch(
+    `http://${URL}?email=${email}&topic=${getParameterByName("topic")}`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      data = result;
+      updateCard();
+    })
+    .catch((error) => console.log("error", error));
+}
+const getEmail = () => chrome.storage.sync.get("email", f);
+getEmail();
 card.addEventListener("click", flip);
 
 const URL = "127.0.0.1:5000/getCards";
@@ -79,16 +94,6 @@ function getParameterByName(name, url) {
   if (!results[2]) return "";
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-fetch(
-  `http://${URL}?email=${email}&topic=${getParameterByName("topic")}`,
-  requestOptions
-)
-  .then((response) => response.json())
-  .then((result) => {
-    data = result;
-    updateCard();
-  })
-  .catch((error) => console.log("error", error));
 
 document.onkeydown = function (event) {
   switch (event.key) {

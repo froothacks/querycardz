@@ -35,6 +35,8 @@ class QueryCardzDatabase:
         return list(filter(lambda obj: topic in obj[TOPICS], all_res))
 
     def getUserRecord(self, user_email):
+        if user_email is None:
+            return None
         if user_email in self.database:
             return self.database[user_email]
         return None
