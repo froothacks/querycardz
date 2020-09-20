@@ -53,6 +53,9 @@ function rightCard() {
   updateCard();
 }
 
+document.querySelector(".left").addEventListener("click", leftCard);
+document.querySelector(".right").addEventListener("click", rightCard);
+
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
