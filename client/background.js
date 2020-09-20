@@ -26,6 +26,61 @@ function doStuffWithDom(domContent) {
       let collection = doc.getElementsByClassName("gLFyf");
       Array.from(collection).forEach(function (element) {
         console.log(element.value);
+        // let data = {query: "what is meiosis"};
+        // let url = 'http://localhost:5000/';
+
+        // $http.post(url, data).then(function(response){
+        //   if(response.data){
+        //     console.log("success");
+        //   } else {
+        //     console.log("failure");
+        //   }
+        // });
+        // var http = new XMLHttpRequest();
+        // // var url = 'get_data.php';
+        // var params = `query=${encodeURIComponent("what is mitosis")}`;
+        // http.open('POST', url, true);
+        //
+        // //Send the proper header information along with the request
+        // http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        // http.onreadystatechange = function() {//Call a function when the state changes.
+        //     if(http.readyState == 4 && http.status == 200) {
+        //         alert(http.responseText);
+        //     }
+        // }
+        // http.send(params);
+
+        // var details = {
+        //     'userName': 'test@gmail.com',
+        //     'password': 'Password!',
+        //     'grant_type': 'password'
+        // };
+
+        // var formBody = [];
+        // for (var property in data) {
+        //   var encodedKey = encodeURIComponent(property);
+        //   var encodedValue = encodeURIComponent(data[property]);
+        //   formBody.push(encodedKey + "=" + encodedValue);
+        // }
+        // formBody = formBody.join("&");
+        //
+        // fetch(url, {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        //   },
+        //   body: formBody
+        // })
+        var requestOptions = {
+          method: 'POST',
+          redirect: 'follow'
+        };
+
+        fetch("http://127.0.0.1:5000/?query=" + element.value, requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
       });
     }
 }

@@ -37,7 +37,7 @@ class QueryCardzDatabase:
         doc_exists = user_email in self.database
         search_data_object = {
             QUERY: search,
-            TOPICS: [],
+            TOPICS: search_topic_array,
             ANSWER: answer
         }
         if doc_exists:

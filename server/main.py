@@ -12,6 +12,7 @@ app = Flask(__name__)
 @app.route('/', methods=["POST"])
 def storeQueryForUser():
     search_query = request.args.get('query')
+    print("sq", search_query, request.args)
     if isQ.predict_question(search_query):
         answer = textinput.getAnswer(search_query)
         if answer is not None:
