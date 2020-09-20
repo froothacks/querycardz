@@ -1,7 +1,10 @@
 var card = document.querySelector(".flipcard");
 
-card.addEventListener("click", function () {
-  console.log("clicked");
+card.addEventListener("click", function (event) {
+  console.log("clicked", event);
+  if (event.target.localName == "a") {
+    return;
+  }
   card.classList.toggle("is-flipped");
   $("#answer").show();
 });
@@ -26,9 +29,19 @@ function leftCard() {
 function updateCard() {
   qa = data[currentCard];
   card.classList.remove("is-flipped");
+  if (!qa.answer) {
+    return;
+  }
+  ans = qa.answer.split("\\n");
+  if (ans.length >= 2) {
+    linkData = ans[1].split(" ( ");
+    linkName = linkData[0];
+    linkURL = linkData[1].replace(" ).");
+    ans = ans[0] + `<a target="_blank" href=${linkURL}>${linkName}</a>`;
+  }
   $("#question").text(qa.query);
   $("#answer").hide();
-  $("#answer").text(qa.answer);
+  $("#answer").html(ans);
 }
 
 function rightCard() {
