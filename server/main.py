@@ -13,13 +13,15 @@ app = Flask(__name__)
 @app.route('/', methods=["POST"])
 def storeQueryForUser():
     search_query = request.args.get('query')
+    email = request.args.get('email')
+
     print("sq", search_query, request.args)
     if isQ.predict_question(search_query):
         answer = textinput.getAnswer(search_query)
         if answer is not None:
             query_topics = topics.getTopics(search_query, answer)
             print("sending", search_query, answer, query_topics)
-            db.search_query("test@test.ca", search_query, answer, query_topics)
+            db.search_query("email", search_query, answer, query_topics)
         else:
             print("no assistant response:", search_query)
     else:
@@ -30,14 +32,12 @@ def storeQueryForUser():
 @app.route('/getCards')
 def getCardsForUser():
     topic = request.args.get('topic')
+    email = request.args.get('email')
+
     print(topic)
-    res = db.getCards("test@test.ca", topic)
+    res = db.getCards(email, topic)
     print(res)
     return json.dumps(res)
-
-# @atexit.register
-# def shutdown():
-#     client.disconnect()
 
 
 if __name__ == '__main__':
