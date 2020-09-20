@@ -1,0 +1,31 @@
+body {
+    background-color: darkgray;
+}
+
+.flipcard {
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+    display: none;
+}
+
+.card__face {
+    position: absolute;
+    color: white;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+  
+.card__face--front {
+    background: lightcoral;
+}
+  
+.card__face--back {
+    background: lightblue;
+    transform: rotateY(180deg);
+}
