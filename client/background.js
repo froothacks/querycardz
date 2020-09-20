@@ -52,6 +52,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 chrome.browserAction.onClicked.addListener(function (activeTab) {
-  var newURL = "http://stackoverflow.com/";
+  var newURL = "newpage.html";
   chrome.tabs.create({ url: newURL });
 });
