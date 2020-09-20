@@ -4,6 +4,13 @@
 
 "use strict";
 
+// chrome.windows.create({
+//     'url': './auth.html',
+//     'width': 454,
+//     'height': 540,
+//     'type': 'popup'
+// });
+
 chrome.runtime.onInstalled.addListener(function () {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([
@@ -51,7 +58,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 });
 
-chrome.browserAction.onClicked.addListener(function (activeTab) {
-  var newURL = "newpage.html";
-  chrome.tabs.create({ url: newURL });
-});
+// chrome.browserAction.onClicked.addListener(function (activeTab) {
+//   var newURL = "newpage.html";
+//   chrome.tabs.create({ url: newURL });
+// });
