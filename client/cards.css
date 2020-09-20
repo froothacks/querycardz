@@ -26,11 +26,11 @@ body {
 }
 
 .flipcard__face--front {
-  background: grey;
+  background: #1f333b;
 }
 
 .flipcard__face--back {
-  background: grey;
+  background: #1f333b;
   transform: rotateY(180deg);
 }
 
