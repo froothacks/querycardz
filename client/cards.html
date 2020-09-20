@@ -13,23 +13,31 @@
     <title>Cards</title>
   </head>
   <body>
-    <div class="row justify-content-center postop flipcard">
-      <div class="col-sm-6 flipcard__face flipcard__face--front rounded">
-        <div class="text-center">
-          <div class="card-body center-in-card">
-            <h5 class="card-text" id="question"></h5>
+    <div class="row justify-content-center centerscreen">
+      <div style="margin-top: 2em;">
+        <span class="chevron left"></span>
+        <p> &nbsp; &nbsp; &nbsp; &nbsp; Change cards &nbsp; &nbsp; &nbsp;
+        <span class="chevron right"></span>
+      </div>
+      <div class="postop flipcard">
+        <div class="col-sm-6 flipcard__face flipcard__face--front rounded">
+          <div class="text-center">
+            <div class="card-body center-in-card">
+              <h5 class="card-text" id="question"></h5>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-sm-6 flipcard__face flipcard__face--back rounded">
-        <div class="text-center">
-          <div class="card-body center-in-card">
-            <p class="card-text" id="answer"></p>
+        <div class="col-sm-6 flipcard__face flipcard__face--back rounded">
+          <div class="text-center">
+            <div class="card-body center-in-card">
+              <p class="card-text" id="answer"></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
 
     <script src="cards.js"></script>
     <script
