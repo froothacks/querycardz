@@ -9,6 +9,7 @@ import json
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=["POST"])
 def storeQueryForUser():
     search_query = request.args.get('query')
@@ -26,6 +27,14 @@ def storeQueryForUser():
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
+@app.route('/getCards')
+def getCardsForUser():
+    topic = request.args.get('topic')
+    print(topic)
+    res = db.getCards("test@test.ca", topic)
+    print(res)
+    return json.dumps(res)
+
 # @atexit.register
 # def shutdown():
 #     client.disconnect()
@@ -35,4 +44,5 @@ if __name__ == '__main__':
     isQ = questions.IsQuestion()
     db = database.QueryCardzDatabase("querycardz", "auth/ibm_credentials.json")
     db.connect()
+    print(db.getCards("test@test.ca", "biology"))
     app.run()
