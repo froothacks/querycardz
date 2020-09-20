@@ -5,6 +5,10 @@ body {
   background-size: cover;
 }
 
+#question {
+  text-transform: capitalize;
+}
+
 .flipcard {
   transition: transform 1s;
   transform-style: preserve-3d;

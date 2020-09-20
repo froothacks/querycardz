@@ -30,7 +30,7 @@ function leftCard() {
 function updateCard() {
   qa = data[currentCard];
   card.classList.remove("is-flipped");
-  if (!qa.answer) {
+  if (!qa || !qa.answer) {
     return;
   }
   ans = qa.answer.split("\\n");
