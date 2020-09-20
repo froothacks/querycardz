@@ -57,6 +57,9 @@ class QueryCardzDatabase:
         }
         if doc_exists:
             doc = self.getUserRecord(user_email)
+            for i in doc[QUERIES]:
+                if i[QUERY] == search:
+                    return
             doc[QUERIES].append(search_data_object)
             doc[TOPICS] += search_topic_array
             doc[TOPICS] = list(set(doc[TOPICS]))
@@ -73,6 +76,5 @@ class QueryCardzDatabase:
 if __name__ == "__main__":
     db = QueryCardzDatabase(databaseName, "auth/ibm_credentials.json")
     db.connect()
-    # db.search_query("test@test.ca", "Another query", "F", ["A", "D"])
-    print(db.getTopics("test@test.ca"))
-    print(db.getCards("test@test.ca", "biology"))
+    db.search_query("leonfattakhov@gmail.com",
+                    "what is a lemma", "FF", ["A", "D"])
