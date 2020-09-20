@@ -19,4 +19,21 @@ console.log("launching auth flow");
 
 chrome.identity.launchWebAuthFlow({url: auth_url, interactive: true}, function(responseUrl) {
     console.log(responseUrl);
+    let queryParams = responseUrl.split("#")[1];
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+
+    fetch("https://www.googleapis.com/oauth2/v3/userinfo?" + queryParams, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log(result);
+            let userEmail = JSON.parse(result).email;
+            chrome.storage.sync.set({email: userEmail}, function() {
+                console.log("Set user email", userEmail);
+            });
+        })
+        .catch(error => console.log('error', error));
 });
+
