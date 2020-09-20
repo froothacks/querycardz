@@ -3,6 +3,12 @@
 // found in the LICENSE file.
 
 "use strict";
+let email = "";
+
+chrome.storage.sync.get("email", (d) => {
+  console.log("got stored email");
+  email = d;
+});
 
 chrome.runtime.onInstalled.addListener(function () {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
@@ -19,7 +25,7 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
-function doStuffWithDom(domContent) {;
+function doStuffWithDom(domContent) {
   if (domContent !== undefined) {
     console.log("google search!");
     let domparser = new DOMParser();
@@ -32,7 +38,10 @@ function doStuffWithDom(domContent) {;
         redirect: "follow",
       };
 
-      fetch("http://127.0.0.1:5000/?query=" + element.value, requestOptions)
+      fetch(
+        `http://127.0.0.1:5000/?query=${element.value}&email=${email}`,
+        requestOptions
+      )
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));

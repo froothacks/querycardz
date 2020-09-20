@@ -27,15 +27,23 @@ class QueryCardzDatabase:
         self.database = self.client.create_database(databaseName)
 
     def getCards(self, user_email, topic):
-        all_res = self.getUserRecord(user_email)[QUERIES]
+        user_record = self.getUserRecord(user_email)
+        if not user_record:
+            return []
+        all_res = user_record[QUERIES]
         print(all_res)
         return list(filter(lambda obj: topic in obj[TOPICS], all_res))
 
     def getUserRecord(self, user_email):
-        return self.database[user_email]
+        if user_email in self.database:
+            return self.database[user_email]
+        return None
 
     def getTopics(self, user_email):
-        doc = self.getUserRecord(user_email)[TOPICS]
+        user_record = self.getUserRecord(user_email)
+        if not user_record:
+            return []
+        doc = user_record[TOPICS]
         return doc
 
     def search_query(self, user_email, search, answer, search_topic_array):

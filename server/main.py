@@ -21,7 +21,7 @@ def storeQueryForUser():
         if answer is not None:
             query_topics = topics.getTopics(search_query, answer)
             print("sending", search_query, answer, query_topics)
-            db.search_query("email", search_query, answer, query_topics)
+            db.search_query(email, search_query, answer, query_topics)
         else:
             print("no assistant response:", search_query)
     else:
@@ -33,10 +33,7 @@ def storeQueryForUser():
 def getCardsForUser():
     topic = request.args.get('topic')
     email = request.args.get('email')
-
-    print(topic)
     res = db.getCards(email, topic)
-    print(res)
     return json.dumps(res)
 
 
