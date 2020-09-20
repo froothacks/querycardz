@@ -14,7 +14,7 @@ app = Flask(__name__)
 @app.route('/', methods=["POST"])
 def storeQueryForUser():
     search_query = request.args.get('query')
-    search_query = spellcheck.spell(search_query)
+    search_query = spellchecker.spell(search_query)
     email = request.args.get('email')
     print(email)
 
@@ -43,7 +43,7 @@ def getCardsForUser():
 
 if __name__ == '__main__':
     isQ = questions.IsQuestion()
-    spell = spellcheck.Speller()
+    spellchecker = spellcheck.Speller()
     db = database.QueryCardzDatabase("querycardz", "auth/ibm_credentials.json")
     db.connect()
     app.run()
