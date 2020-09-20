@@ -43,6 +43,13 @@ def getCardsForUser():
     return json.dumps(res)
 
 
+@app.route('/topics')
+def getTopics():
+    email = request.args.get('email')
+    res = db.getTopics(email)
+    return json.dumps(res)
+
+
 if __name__ == '__main__':
     isQ = questions.IsQuestion()
     spellchecker = spellcheck.Speller()
