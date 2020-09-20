@@ -12,10 +12,11 @@ function p(d) {
   pic = d.picture;
   if (pic == "" || pic == undefined) {
     setTimeout(getPicture, 2000);
+  } else {
+    console.log(pic);
+    $("#pic").attr("src", pic);
+    $("#signinState").html("Signed In");
   }
-  console.log(pic);
-  $("#pic").attr("src", pic);
-  $("#signinState").html("Signed In");
 }
 const getPicture = () => chrome.storage.sync.get("picture", p);
 getPicture();
