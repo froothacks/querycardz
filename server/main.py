@@ -14,6 +14,7 @@ app = Flask(__name__)
 def storeQueryForUser():
     search_query = request.args.get('query')
     email = request.args.get('email')
+    print(email)
 
     print("sq", search_query, request.args)
     if isQ.predict_question(search_query):
@@ -33,6 +34,7 @@ def storeQueryForUser():
 def getCardsForUser():
     topic = request.args.get('topic')
     email = request.args.get('email')
+    print(email, topic)
     res = db.getCards(email, topic)
     return json.dumps(res)
 

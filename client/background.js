@@ -5,8 +5,8 @@
 "use strict";
 let email = "";
 
-chrome.storage.sync.get("email", (d) => {
-  console.log("got stored email");
+chrome.storage.sync.get("email", ({ email: d }) => {
+  console.log("got stored email", d);
   email = d;
 });
 
