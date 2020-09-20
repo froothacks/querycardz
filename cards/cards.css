@@ -9,23 +9,22 @@ body {
     position: relative;
 }
 
-.card.is-flipped {
+.flipcard.is-flipped {
     transform: rotateY(180deg);
-    display: none;
 }
 
-.card__face {
+.flipcard__face {
     position: absolute;
     color: white;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
   
-.card__face--front {
+.flipcard__face--front {
     background: lightcoral;
 }
   
-.card__face--back {
+.flipcard__face--back {
     background: lightblue;
     transform: rotateY(180deg);
 }
