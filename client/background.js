@@ -5,10 +5,25 @@
 "use strict";
 let email = "";
 
-chrome.storage.sync.get("email", ({ email: d }) => {
-  console.log("got stored email", d);
-  email = d;
-});
+function f(d) {
+  console.log(d);
+  email = d.email;
+  if (email == "") {
+    getEmail();
+  }
+  fetch(
+    `http://${URL}?email=${email}&topic=${getParameterByName("topic")}`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      data = result;
+      updateCard();
+    })
+    .catch((error) => console.log("error", error));
+}
+const getEmail = () => chrome.storage.sync.get("email", f);
+getEmail();
 
 // chrome.windows.create({
 //     'url': './auth.html',
