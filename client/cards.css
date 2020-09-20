@@ -41,6 +41,10 @@ body {
   background: #1f333b;
 }
 
+.text-center {
+  -webkit-user-select: none;
+}
+
 .flipcard__face--back {
   background: #1f333b;
   transform: rotateY(180deg);

@@ -1,4 +1,5 @@
 var card = document.querySelector(".flipcard");
+var email = "";
 function flip(event) {
   console.log("clicked", event);
   if (event && event.target.localName == "a") {
@@ -7,6 +8,7 @@ function flip(event) {
   card.classList.toggle("is-flipped");
   $("#answer").show();
 }
+chrome.storage.sync.get("email", (d) => (email = d));
 
 card.addEventListener("click", flip);
 
@@ -75,7 +77,10 @@ function getParameterByName(name, url) {
   if (!results[2]) return "";
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-fetch(`http://${URL}?topic=${getParameterByName("topic")}`, requestOptions)
+fetch(
+  `http://${URL}?email=${email}&topic=${getParameterByName("topic")}`,
+  requestOptions
+)
   .then((response) => response.json())
   .then((result) => {
     data = result;
