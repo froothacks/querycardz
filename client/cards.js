@@ -8,7 +8,9 @@ function flip(event) {
   card.classList.toggle("is-flipped");
   $("#answer").show();
 }
-chrome.storage.sync.get("email", (d) => (email = d));
+chrome.storage.sync.get("email", (d) => {
+  email = d;
+});
 
 card.addEventListener("click", flip);
 
