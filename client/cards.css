@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+body {
+  background-image: url("https://images.unsplash.com/photo-1547563216-9efe68ce596f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.flipcard {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+}
+
+.flipcard.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flipcard__face {
+  position: absolute;
+  color: white;
+  width: 604px;
+  height: 404px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flipcard__face--front {
+  background: grey;
+}
+
+.flipcard__face--back {
+  background: grey;
+  transform: rotateY(180deg);
+}
+
+.postop {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  position: absolute;
+  top: 20%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.center-in-card {
+  width: 100%;
+}
