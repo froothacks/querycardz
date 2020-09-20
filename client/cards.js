@@ -41,7 +41,9 @@ function updateCard() {
     ans = ans[0] + ` <a target="_blank" href=${linkURL}>${linkName}</a>`;
   }
   $("#cardProgress").text(
-    Math.round((currentCard * 100) / (data.length - 1)) + " %"
+    Math.round(
+      (currentCard * 100) / (data.length - 1 == 0 ? 1 : data.length - 1)
+    ) + " %"
   );
   $("#question").text(qa.query);
   $("#answer").hide();
