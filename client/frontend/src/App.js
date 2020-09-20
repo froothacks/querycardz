@@ -8,6 +8,16 @@ import Select from '@material-ui/core/Select';
 import logo from './logo.svg';
 import './App.css';
 
+
+const styles = theme => ({
+  root: {
+    background: "blue",
+  },
+  whiteColor: {
+    color: "white"
+  }
+});
+
 export default function App() {
   const classes = makeStyles();
   const [age, setTopic] = React.useState('');
@@ -31,6 +41,10 @@ export default function App() {
             value={age}
             onChange={handleChange}
             color="white"
+            classes={{
+              root: classes.whiteColor,
+              icon: classes.whiteColor
+            }} 
           >
             <MenuItem value="">
               <em>None</em>
